@@ -23,11 +23,7 @@ public class ImportOrderController {
     @GetMapping
     public ResponseEntity<ResponseObject> getImportOrderList(){
         List<ImportOrderDTO> importOrderDTOList = importOrderService.findAll();
-        return ResponseEntity.ok(ResponseObject.builder()
-                .responseCode(200)
-                .message("Success")
-                .data(importOrderDTOList)
-                .build());
+        return null;
     }
 
 }
