@@ -20,10 +20,20 @@ public class ImportOrderController {
         this.importOrderService = importOrderService;
     }
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<ResponseObject> getImportOrderList(){
         List<ImportOrderDTO> importOrderDTOList = importOrderService.findAll();
         return null;
     }
+    @RequestMapping(method = RequestMethod.GET, params = {"name","phone"})
+    public ResponseEntity<ResponseObject> searchImport(@RequestParam(value = "name", defaultValue = "null") @Valid String name,
+                                                       @RequestParam(value = "phone", defaultValue = "null") @Valid String phone) {
+        return ResponseEntity.ok(ResponseObject.builder()
+                .responseCode(200)
+                .message("Success")
+                .data(name)
+                .build());
 
+
+}
 }
