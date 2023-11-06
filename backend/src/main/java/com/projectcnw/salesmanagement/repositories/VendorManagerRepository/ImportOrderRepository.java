@@ -12,5 +12,8 @@ import java.util.List;
 public interface ImportOrderRepository extends JpaRepository<ImportOrder, Integer> {
     @Query("SELECT import FROM ImportOrder import WHERE import.vendor.name = :vendorName")
     List<ImportOrder> findByVendorName(String vendorName);
+    @Query("SELECT import FROM ImportOrder import WHERE import.vendor.phone = :phone")
+    List<ImportOrder> findByVendorPhone(String phone);
+
     List<ImportOrder> findImportOrderByVendor(Vendor vendor);
 }

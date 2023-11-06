@@ -14,5 +14,7 @@ public interface IImportOrderService {
     ImportOrderDTO findById(Integer id);
     List<ImportOrderDTO> findByName(String name);
 
+    List<ImportOrderDTO> findByPhone(String name);
+
 
 }

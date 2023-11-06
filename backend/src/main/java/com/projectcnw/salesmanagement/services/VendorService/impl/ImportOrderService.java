@@ -196,5 +196,14 @@ public class ImportOrderService implements IImportOrderService {
         }
         return results;
     }
-    
+    @Override
+    public List<ImportOrderDTO> findByPhone(String phone) {
+        List<ImportOrderDTO> results = new ArrayList<>();
+        List<ImportOrder> entities = importOrderRepository.findByVendorPhone(phone);
+        for(ImportOrder item: entities){
+            ImportOrderDTO importOrderDTO = importOrderConverter.toDto(item);
+            results.add(importOrderDTO);
+        }
+        return results;
+    }
 }

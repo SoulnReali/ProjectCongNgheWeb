@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/admin/import")
@@ -23,15 +24,28 @@ public class ImportOrderController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<ResponseObject> getImportOrderList(){
         List<ImportOrderDTO> importOrderDTOList = importOrderService.findAll();
-        return null;
+        return ResponseEntity.ok(ResponseObject.builder()
+                .responseCode(200)
+                .message("Success")
+                .data(importOrderDTOList)
+                .build());
     }
     @RequestMapping(method = RequestMethod.GET, params = {"name","phone"})
     public ResponseEntity<ResponseObject> searchImport(@RequestParam(value = "name", defaultValue = "null") @Valid String name,
                                                        @RequestParam(value = "phone", defaultValue = "null") @Valid String phone) {
+        List<ImportOrderDTO> importOrderDTOList = importOrderService.findAll();;
+        if(!Objects.equals(name, "null"))
+        {
+           importOrderDTOList = importOrderService.findByName(name);
+        }
+        else if(!Objects.equals(phone, "null"))
+        {
+            importOrderDTOList = importOrderService.findByPhone(phone);
+        }
         return ResponseEntity.ok(ResponseObject.builder()
                 .responseCode(200)
                 .message("Success")
-                .data(name)
+                .data(importOrderDTOList)
                 .build());
 
 
