@@ -30,5 +30,19 @@ public class VendorController {
                 .data(importVenderDTOList)
                 .build());
     }
-
+    @RequestMapping(method = RequestMethod.GET, params = {"name", "phone"})
+    public ResponseEntity<ResponseObject> searchISupplier(@RequestParam(value = "name", defaultValue = "null") @Valid String name,
+                                                          @RequestParam(value = "phone", defaultValue = "null") @Valid String phone) {
+        VendorDTO importVenderDTO = null;
+        if (!Objects.equals(name, "null")) {
+            importVenderDTO = vendorService.findByName(name);
+        } else if (!Objects.equals(phone, "null")) {
+            importVenderDTO = vendorService.findByPhone(phone);
+        }
+        return ResponseEntity.ok(ResponseObject.builder()
+                .responseCode(200)
+                .message("Success")
+                .data(importVenderDTO)
+                .build());
+    }
 }

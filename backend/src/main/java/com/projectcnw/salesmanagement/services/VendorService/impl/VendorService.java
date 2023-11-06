@@ -118,6 +118,14 @@ public class VendorService implements IVendorService {
     @Override
     public VendorDTO findByName(String name) {
         Vendor vendor = vendorRepository.findByName(name);
+        if(vendor == null) return null;
+        return vendorConverter.toDto(vendor) ;
+    }
+
+    @Override
+    public VendorDTO findByPhone(String name) {
+        Vendor vendor = vendorRepository.findVendorByPhone(name);
+        if(vendor == null) return null;
         return vendorConverter.toDto(vendor);
     }
 }

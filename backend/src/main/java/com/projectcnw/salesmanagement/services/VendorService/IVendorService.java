@@ -11,4 +11,5 @@ public interface IVendorService {
     List<VendorDTO> findAll(Pageable pageable);
     VendorDTO findById(Integer id);
     VendorDTO findByName(String name);
+    VendorDTO findByPhone(String phone);
 }
