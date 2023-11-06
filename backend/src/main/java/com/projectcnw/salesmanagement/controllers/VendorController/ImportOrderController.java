@@ -3,6 +3,7 @@ package com.projectcnw.salesmanagement.controllers.VendorController;
 import com.projectcnw.salesmanagement.dto.ResponseObject;
 import com.projectcnw.salesmanagement.dto.orderDtos.createOrder.CreateOrderDto;
 import com.projectcnw.salesmanagement.dto.vendorDtos.ImportOrderDTO;
+import com.projectcnw.salesmanagement.dto.vendorDtos.createImportOrder.CreateImportOrder;
 import com.projectcnw.salesmanagement.services.VendorService.impl.ImportOrderService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +57,15 @@ public class ImportOrderController {
                 .responseCode(200)
                 .message("Success")
                 .data(importOrderDTOList)
+                .build());
+    }
+    @PostMapping
+    public ResponseEntity<ResponseObject> createImport(@RequestBody @Valid CreateImportOrder createImportOrder) {
+
+        importOrderService.createImportOrder(createImportOrder);
+        return ResponseEntity.ok(ResponseObject.builder()
+                .message("success")
+                .responseCode(200)
                 .build());
     }
 

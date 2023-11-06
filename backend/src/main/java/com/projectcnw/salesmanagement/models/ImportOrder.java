@@ -2,14 +2,16 @@ package com.projectcnw.salesmanagement.models;
 
 import com.projectcnw.salesmanagement.models.enums.ShipmentStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "import_order")
 public class ImportOrder extends BaseEntity {
 
@@ -27,4 +29,6 @@ public class ImportOrder extends BaseEntity {
 
     @OneToMany(mappedBy = "importOrder")
     private List<ImportItem> importItemList;
+
+
 }
