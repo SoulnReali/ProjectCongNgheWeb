@@ -12,4 +12,5 @@ public interface IVendorService {
     VendorDTO findById(Integer id);
     VendorDTO findByName(String name);
     VendorDTO findByPhone(String phone);
+    VendorDTO createVendorProduct(VendorDTO vendorDTO);
 }

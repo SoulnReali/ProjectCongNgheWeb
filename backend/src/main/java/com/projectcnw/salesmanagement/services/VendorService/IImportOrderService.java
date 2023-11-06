@@ -1,6 +1,7 @@
 package com.projectcnw.salesmanagement.services.VendorService;
 
 import com.projectcnw.salesmanagement.dto.vendorDtos.ImportOrderDTO;
+import com.projectcnw.salesmanagement.dto.vendorDtos.VendorDTO;
 import com.projectcnw.salesmanagement.models.UserEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;

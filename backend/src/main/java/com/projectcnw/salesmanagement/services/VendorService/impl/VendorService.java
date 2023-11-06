@@ -1,8 +1,11 @@
 package com.projectcnw.salesmanagement.services.VendorService.impl;
 
 import com.projectcnw.salesmanagement.converter.*;
+import com.projectcnw.salesmanagement.dto.productDtos.BaseProductDto;
+import com.projectcnw.salesmanagement.dto.productDtos.ILastIdVariant;
 import com.projectcnw.salesmanagement.dto.vendorDtos.*;
 import com.projectcnw.salesmanagement.exceptions.*;
+import com.projectcnw.salesmanagement.exceptions.ProductManagerExceptions.ProductException;
 import com.projectcnw.salesmanagement.models.*;
 import com.projectcnw.salesmanagement.models.Payment;
 import com.projectcnw.salesmanagement.models.Vendor;
@@ -12,10 +15,13 @@ import com.projectcnw.salesmanagement.repositories.VendorManagerRepository.Impor
 import com.projectcnw.salesmanagement.repositories.PaymentRepository;
 import com.projectcnw.salesmanagement.repositories.VendorManagerRepository.VendorRepository;
 import com.projectcnw.salesmanagement.services.VendorService.IVendorService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -127,5 +133,16 @@ public class VendorService implements IVendorService {
         Vendor vendor = vendorRepository.findVendorByPhone(name);
         if(vendor == null) return null;
         return vendorConverter.toDto(vendor);
+    }
+    private ModelMapper modelMapper = new ModelMapper();
+    @Override
+    @Transactional
+    public VendorDTO createVendorProduct(VendorDTO vendorDTO) {
+        Vendor vendor = modelMapper.map(vendorDTO, Vendor.class);
+
+
+        Vendor vendor1 = vendorRepository.save(vendor);
+
+        return this.findById(vendor1.getId());
     }
 }
